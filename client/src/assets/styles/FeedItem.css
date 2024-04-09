@@ -1,0 +1,31 @@
+.feed-item {
+    padding: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    width: 100%;
+}
+
+.feed-item__image {
+    height: 200px;
+    width: 260px;
+    overflow: hidden;
+}
+
+.feed-item__image >img {
+    height: 100%;
+    width: 100%;
+    border-radius: 14%;
+    object-fit: cover;
+}
+
+.feed-item__details {
+    max-width: 40%;
+}
+
+.feed-item__details-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
