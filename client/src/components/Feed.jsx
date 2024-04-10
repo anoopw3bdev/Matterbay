@@ -17,7 +17,7 @@ const Feed = ({ hasMore, loadMore, data }) => {
   return (
     <div className="feed">
       <>
-        {data?.length &&
+        {!!data?.length &&
           data?.map((node, index) => {
             if (index === data.length - 1) {
               return (

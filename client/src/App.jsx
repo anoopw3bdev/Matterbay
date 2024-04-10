@@ -28,7 +28,7 @@ export const App = () => {
 
   return (
     <>
-      {feed && (
+      {!!feed && (
         <Feed
           hasMore={hasMore}
           isLoading={isLoading}
