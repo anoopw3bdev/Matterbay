@@ -10,7 +10,6 @@
 .feed-item__image {
     height: 200px;
     width: 260px;
-    overflow: hidden;
 }
 
 .feed-item__image >img {

@@ -1,19 +1,44 @@
-import PropTypes from 'prop-types';
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import { FeedItem } from "./FeedItem";
-import "../assets/styles/Feed.css"
+import "../assets/styles/Feed.css";
+import useOnScreen from "../hooks/useInfiniteScroll";
 
-const Feed = ({data}) => {
-    return (
-        <div className="feed">
-          {data?.nodes?.length && data?.nodes?.map((node, index) => (
-            <FeedItem key={index} item={node} />
-          ))}
-        </div>
-    );
-}
+const Feed = ({ hasMore, loadMore, data }) => {
+  const { measureRef, isIntersecting, observer } = useOnScreen();
 
-Feed.propTypes = {
-    data: PropTypes.object.isRequired,
+  useEffect(() => {
+    if (isIntersecting && hasMore) {
+      loadMore();
+      observer.disconnect();
+    }
+  }, [isIntersecting, hasMore, loadMore]);
+
+  return (
+    <div className="feed">
+      <>
+        {data?.length &&
+          data?.map((node, index) => {
+            if (index === data.length - 1) {
+              return (
+                <div key={index}>
+                  <FeedItem loadMoreRef={measureRef} item={node} />
+                </div>
+              );
+            }
+            return <FeedItem key={index} item={node} />;
+          })}
+      </>
+    </div>
+  );
 };
 
-export { Feed }
+Feed.propTypes = {
+  data: PropTypes.array.isRequired,
+  loadMoreRef: PropTypes.object,
+  loading: PropTypes.bool,
+  loadMore: PropTypes.func,
+  hasMore: PropTypes.bool,
+};
+
+export { Feed };

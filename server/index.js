@@ -33,7 +33,6 @@ app.use(cors());
 
 app.get('/api/get-feed', async (req, res) => {
     const { page } = req.query;
-    console.log(page, "page")
     const apiUrl = `https://englishapi.pinkvilla.com/app-api/v1/photo-gallery-feed-page/page/${page}`;
     
     try {
