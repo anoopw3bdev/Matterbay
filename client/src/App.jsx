@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { useFetchData } from "./hooks/useFetchData";
 import { Feed } from "./components/Feed";
+import { generateUrl } from "./utils/generateUrl";
 
 export const App = () => {
   const { getData } = useFetchData();
@@ -13,10 +14,7 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      const newFeed = await getData(
-        "http://localhost:3000/api/get-feed",
-        page
-      );
+      const newFeed = await getData(generateUrl("get-feed"), page);
       setFeed((prevItems) => [...prevItems, ...newFeed]);
       setHasMore(newFeed.length > 0);
       setIsLoading(false);
